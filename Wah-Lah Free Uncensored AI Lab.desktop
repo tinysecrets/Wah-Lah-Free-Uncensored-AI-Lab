@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wah-Lah Free Uncensored AI Lab
+Comment=Galaxy interface — fixed Hermes 3 405B free model with guarded code tools and voice
+Exec=/bin/bash /home/justin/Desktop/Wah-Lah-Free-Uncensored-AI-Lab/launch.sh
+Icon=/home/justin/Desktop/Wah-Lah-Free-Uncensored-AI-Lab/assets/galaxy.svg
+Terminal=false
+Categories=Development;
+StartupNotify=true

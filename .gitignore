@@ -1,0 +1,7 @@
+# Keep credentials, logs, and workspace contents out of source control
+.secrets/*
+!.secrets/.keep
+logs/*
+workspace/*
+__pycache__/
+*.pyc

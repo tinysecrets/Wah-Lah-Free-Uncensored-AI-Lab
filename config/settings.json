@@ -1,0 +1,30 @@
+{
+  "api_base_url": "https://openrouter.ai/api/v1",
+  "api_key_file": ".secrets/openrouter-api-key",
+  "ping_url": "http://100.105.171.108:3001/api/ping",
+  "freellmapi_api_base_url": "http://100.105.171.108:3001/v1",
+  "freellmapi_key_file": ".secrets/api-key",
+  "model_config": "config/models.json",
+  "workspace": "workspace",
+  "secrets_dir": ".secrets",
+  "timeout_seconds": 120,
+  "max_tool_rounds": 6,
+  "max_response_tokens": 1600,
+  "voice_output_default": true,
+  "free_only": true,
+  "strict_model_id": true,
+  "automatic_fallback": false,
+  "tool_writes_require_confirmation": true,
+  "cli_command_allowlist": [
+    "list",
+    "python_check",
+    "node_check",
+    "pytest",
+    "git_status",
+    "git_diff_check"
+  ],
+  "cli_timeout_seconds": 30,
+  "sandbox": "bubblewrap",
+  "prompt_logging": false,
+  "inference_note": "Direct OpenRouter exact :free model route because the existing FreeLLMAPI server currently reports this 405B model disabled/needsKey. FreeLLMAPI is still health-checked; no shared service configuration or restart was performed."
+}

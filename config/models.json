@@ -1,0 +1,36 @@
+{
+  "name": "Wah-Lah Free Uncensored AI Lab",
+  "allowlist_mode": "strict",
+  "automatic_fallback": false,
+  "free_only": true,
+  "default_model": "nousresearch/hermes-3-llama-3.1-405b:free",
+  "models": [
+    {
+      "id": "nousresearch/hermes-3-llama-3.1-405b:free",
+      "provider_model_id": "nousresearch/hermes-3-llama-3.1-405b:free",
+      "provider_id": "openrouter",
+      "provider_api_key_required": true,
+      "display_name": "Hermes 3 Llama 3.1 405B — Free route",
+      "parameter_count": "405B",
+      "status": "allowlisted",
+      "claimed_characteristics": [
+        "uncensored",
+        "steerable",
+        "coding",
+        "tool-calling"
+      ],
+      "provider": "OpenRouter :free route; FreeLLMAPI remains linked for health/status",
+      "price_policy": "$0 only; exact :free model suffix required; no model or paid fallback",
+      "uncensored_source": "https://nousresearch.com/freedom-at-the-frontier-hermes-3",
+      "free_endpoint_source": "https://openrouter.ai/nousresearch/hermes-3-llama-3.1-405b:free/pricing",
+      "schedule_notice": "OpenRouter currently marks Hermes 3 405B as going away November 2, 2026. If that free endpoint is retired, this app must stop until another explicitly uncensored $0 endpoint is verified.",
+      "constraints": "The client sends this exact model ID only; uses the :free suffix; fails closed if no free endpoint is available; does not send automatic fallback models."
+    }
+  ],
+  "disallowed_behavior": [
+    "automatic model selection",
+    "generic auto route",
+    "fallback to other models",
+    "paid provider fallback"
+  ]
+}
