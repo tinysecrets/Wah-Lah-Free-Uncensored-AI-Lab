@@ -100,10 +100,10 @@ class GalaxyApp:
         header.create_text(34, 70, anchor="w", text="UNCENSORED INTELLIGENCE LAB", fill=TEXT,
                            font=("DejaVu Sans", 25, "bold"))
         header.create_text(36, 108, anchor="w",
-                           text="Free model • strict allowlist • voice • coding tools • your PC stays yours",
+                           text="Free-first AI • voice • coding tools • web research • direct answers",
                            fill=MUTED, font=("DejaVu Sans", 10))
         header.create_text(36, 137, anchor="w",
-                           text="HERMES 3 / LLAMA 3.1 405B  |  NO AUTO-FALLBACK  |  WORKSPACE-ONLY WRITES",
+                           text="DAI ROUTER / FREE-FIRST  |  VOICE + TOOLS  |  CODING + RESEARCH",
                            fill=GOLD, font=("DejaVu Sans Mono", 9, "bold"))
 
         body = tk.Frame(self.root, bg=BG)
@@ -117,7 +117,7 @@ class GalaxyApp:
         for label, subtitle in [
             ("CHAT", "Talk to the model"),
             ("WORKSPACE", "Code and files"),
-            ("TOOLS", "Guarded operations"),
+            ("TOOLS", "Coding and system tools"),
             ("MODEL CORE", "Policy and status"),
         ]:
             b = tk.Button(nav, text=label + "\n" + subtitle, anchor="w", justify="left",
@@ -130,13 +130,13 @@ class GalaxyApp:
         tk.Frame(nav, bg=BORDER, height=1).pack(fill="x", padx=14, pady=(18, 12))
         tk.Label(nav, text="ACTIVE MODEL", bg=PANEL, fg=MUTED,
                  font=("DejaVu Sans", 8, "bold")).pack(anchor="w", padx=18)
-        tk.Label(nav, text="HERMES 3\n405B", bg=PANEL, fg=CYAN, justify="left",
+        tk.Label(nav, text="DAI\nAUTO", bg=PANEL, fg=CYAN, justify="left",
                  font=("DejaVu Sans", 19, "bold")).pack(anchor="w", padx=18, pady=(5, 0))
-        tk.Label(nav, text="Free route • fixed ID\nNo paid fallback", bg=PANEL, fg=GOLD, justify="left",
+        tk.Label(nav, text="Free-first router\nPaid routes disabled", bg=PANEL, fg=GOLD, justify="left",
                  font=("DejaVu Sans", 9)).pack(anchor="w", padx=18, pady=(4, 12))
         tk.Label(nav, text="POWER BOUNDARIES", bg=PANEL, fg=MUTED,
                  font=("DejaVu Sans", 8, "bold")).pack(anchor="w", padx=18)
-        for txt in ("✓ No arbitrary shell", "✓ Workspace-only files", "✓ Approve each write", "✓ CLI sandbox + timeout"):
+        for txt in ("✓ Chat + web research", "✓ Workspace coding tools", "✓ Free-first model routing", "✓ Host changes remain controlled"):
             tk.Label(nav, text=txt, bg=PANEL, fg=GREEN,
                      font=("DejaVu Sans", 8)).pack(anchor="w", padx=18, pady=3)
         tk.Button(nav, text="OPEN WORKSPACE FOLDER", command=self.open_workspace,
@@ -205,7 +205,7 @@ class GalaxyApp:
         self.transcript.tag_configure("meta", foreground=MUTED, font=("DejaVu Sans Mono", 8))
         self.append_transcript("system",
             "GALAXY ONLINE / model target: " + MODEL +
-            "\nOpenRouter exact :free route only. Send stays locked until $0 endpoint verification succeeds. Writes and CLI execution require approval.")
+            "\nLocal DAI router / free-first model selection. The app no longer requires a specific upstream model ID. Workspace writes and CLI execution retain their existing approval and sandbox boundaries.")
         compose = tk.Frame(card, bg=PANEL)
         compose.pack(fill="x", padx=12, pady=(0, 12))
         self.input = tk.Text(compose, height=3, wrap="word", bg="#111a2d", fg=TEXT,
@@ -277,13 +277,13 @@ class GalaxyApp:
     def build_tools_page(self):
         page = tk.Frame(self.content, bg=BG)
         self.pages["TOOLS"] = page
-        tk.Label(page, text="GUARDED OPERATIONS", bg=BG, fg=TEXT,
+        tk.Label(page, text="TOOLS / OPERATIONS", bg=BG, fg=TEXT,
                  font=("DejaVu Sans", 17, "bold")).pack(anchor="w", pady=(3, 5))
-        tk.Label(page, text="No general-purpose shell. The CLI is a fixed list of operations, sandboxed with networking disabled.",
+        tk.Label(page, text="Use the available file, web, calculation and coding tools. CLI checks remain isolated and approved before execution.",
                  bg=BG, fg=MUTED, font=("DejaVu Sans", 9)).pack(anchor="w", pady=(0, 12))
         row = tk.Frame(page, bg=BG)
         row.pack(fill="x")
-        card1 = self.make_card(row, "CONNECTION", "Check the current free endpoint and the fixed model ID.")
+        card1 = self.make_card(row, "ROUTER CONNECTION", "Check the local DAI router and configured model alias.")
         card1.pack(side="left", fill="both", expand=True, padx=(0, 8))
         self.make_button(card1, "TEST FREE MODEL", self.check_model, CYAN).pack(anchor="w", padx=15, pady=(2, 15))
         card2 = self.make_card(row, "WORKSPACE", "List workspace files or open the folder in the file manager.")
@@ -314,22 +314,22 @@ class GalaxyApp:
     def build_model_page(self):
         page = tk.Frame(self.content, bg=BG)
         self.pages["MODEL CORE"] = page
-        tk.Label(page, text="MODEL CORE / PERMISSIONS", bg=BG, fg=TEXT,
+        tk.Label(page, text="MODEL CORE / ROUTING", bg=BG, fg=TEXT,
                  font=("DejaVu Sans", 17, "bold")).pack(anchor="w", pady=(3, 12))
-        model = self.make_card(page, "HERMES 3 · LLAMA 3.1 · 405B", "The only model this app may call.")
+        model = self.make_card(page, "DAI AUTO · FREE-FIRST ROUTER", "The local router selects an available free model.")
         model.pack(fill="x", pady=(0, 10))
         tk.Label(model, text=MODEL, bg=PANEL, fg=CYAN, font=("DejaVu Sans Mono", 11, "bold")).pack(anchor="w", padx=15, pady=(2, 14))
-        notes = self.make_card(page, "STRICT ROUTING POLICY")
+        notes = self.make_card(page, "FREE-FIRST ROUTING")
         notes.pack(fill="x", pady=(0, 10))
         for line in [
             "Inference API: " + backend.SETTINGS["api_base_url"],
-            "Existing FreeLLMAPI health: " + backend.SETTINGS["ping_url"],
-            "A single, exact model ID is allowlisted. There is no auto model-selection.",
-            "Live status: the exact :free model currently returns HTTP 404; Send remains locked until it is explicitly verified at $0.",
-            "If the model is unavailable, the app stops; it does not switch to a paid or ordinary model.",
-            "This lab uses one exact OpenRouter :free model ID; no auto routing or model fallback.",
-            "OpenRouter key: .secrets/openrouter-api-key (owner-only permissions, 0600).",
-            "The pre-existing FreeLLMAPI model catalog currently has large models disabled/needsKey; its service was not reconfigured.",
+            "Local DAI router health: " + backend.SETTINGS["ping_url"],
+            "Model selection is managed by the local DAI free-first router.",
+            "The app uses dai/auto through the local DAI router instead of requiring a specific upstream model ID.",
+            "The router selects an available free model; paid routes remain disabled.",
+            "This lab uses router-managed free-first selection. It does not configure a direct paid provider route.",
+            "Local DAI router client key: .secrets/api-key (owner-only permissions, 0600).",
+            "The app now uses the existing local DAI router instead of requiring the unavailable single-model upstream route.",
         ]:
             tk.Label(notes, text="• " + line, bg=PANEL, fg=TEXT, anchor="w", justify="left",
                      wraplength=780, font=("DejaVu Sans", 9)).pack(fill="x", padx=15, pady=4)
@@ -363,7 +363,7 @@ class GalaxyApp:
         if not hasattr(self, "transcript"):
             return
         self.transcript.configure(state="normal")
-        labels = {"user": "YOU", "assistant": "HERMES 3 / 405B", "system": "GALAXY",
+        labels = {"user": "YOU", "assistant": "WAH-LAH AI", "system": "GALAXY",
                   "error": "BLOCKED / ERROR", "meta": "TOOL"}
         self.transcript.insert("end", "\n" + labels.get(tag, "GALAXY") + "\n", tag)
         self.transcript.insert("end", str(text).rstrip() + "\n", tag)
@@ -382,7 +382,7 @@ class GalaxyApp:
     def initial_check(self):
         if not self.key:
             self.set_status("CLIENT KEY MISSING — use ./launch.sh --setup-key")
-            self.append_transcript("error", "No OpenRouter API key is saved. The GUI will not collect keys in plain text; run ./launch.sh --setup-key from the folder for hidden input.")
+            self.append_transcript("error", "No local DAI router client key is saved. Run ./launch.sh --setup-key from the folder to enter it securely.")
             return
         threading.Thread(target=self.model_check_worker, daemon=True).start()
 
@@ -392,7 +392,7 @@ class GalaxyApp:
             return
         if self.busy:
             return
-        self.set_status("VERIFYING FREE ROUTE AND EXACT MODEL…")
+        self.set_status("VERIFYING LOCAL DAI ROUTER…")
         self.feed("Starting authenticated model availability check.")
         threading.Thread(target=self.model_check_worker, daemon=True).start()
 
@@ -402,8 +402,8 @@ class GalaxyApp:
             backend.verify_model(self.key)
             self.last_model_check = True
             self.uiq.put(("model_check_done", True))
-            self.uiq.put(("status", "VERIFIED / EXACT :FREE MODEL / $0 / NO FALLBACK"))
-            self.uiq.put(("feed", "OpenRouter confirms the exact allowlisted Hermes 3 model and $0 pricing; fallback remains disabled. FreeLLMAPI health was checked separately.", False))
+            self.uiq.put(("status", "VERIFIED / LOCAL DAI FREE-FIRST ROUTER"))
+            self.uiq.put(("feed", "Local DAI router verified. The app uses router-managed free-first model selection; paid routes remain disabled.", False))
         except Exception as exc:
             self.last_model_check = False
             self.uiq.put(("model_check_done", False))
@@ -424,14 +424,14 @@ class GalaxyApp:
             messagebox.showerror("Client key missing", "Run ./launch.sh --setup-key from the app folder first.", parent=self.root)
             return
         if not self.last_model_check:
-            messagebox.showerror("Free model unavailable", "The exact $0 Hermes 3 405B endpoint has not passed verification. No message was sent. Press TEST FREE MODEL to retry; the app will not switch to a paid or different model.", parent=self.root)
+            messagebox.showerror("Router unavailable", "The local DAI router has not passed its connection check. Press TEST FREE MODEL to retry.", parent=self.root)
             return
         self.input.delete("1.0", "end")
         self.messages.append({"role": "user", "content": text})
         self.append_transcript("user", text)
         self.busy = True
         self.send_button.configure(state="disabled")
-        self.set_status("HERMES 3 / THINKING WITH THE FIXED MODEL…")
+        self.set_status("DAI AUTO / GENERATING RESPONSE…")
         threading.Thread(target=self.chat_worker, daemon=True).start()
 
     def ask_approval(self, title, details):
@@ -534,12 +534,7 @@ class GalaxyApp:
                            "max_tokens": int(backend.SETTINGS.get("max_response_tokens", 1600)),
                            "temperature": 0.8}
                 body, headers = backend.api("/chat/completions", self.key, payload)
-                served = body.get("model")
-                if served and served not in (MODEL, MODEL.removesuffix(":free")):
-                    raise RuntimeError("Strict policy blocked the response: returned model ID differs from the exact Hermes 3 405B free allowlist entry.")
                 route = next((v for k, v in headers.items() if k.lower() == "x-routed-via"), "")
-                if MC["models"][0].get("provider_id") == "septor" and route and "septor" not in route.lower():
-                    raise RuntimeError("Strict route policy blocked the response: provider header does not match the allowlisted provider.")
                 usage = body.get("usage", {}) if isinstance(body, dict) else {}
                 reported_cost = usage.get("cost") if isinstance(usage, dict) else None
                 if reported_cost is not None:
@@ -775,7 +770,7 @@ class GalaxyApp:
                     self.append_transcript("assistant", answer or "(empty model response)")
                     if route:
                         self.append_transcript("meta", "Provider route: " + str(route))
-                    self.set_status("RESPONSE COMPLETE / fixed model / no fallback")
+                    self.set_status("RESPONSE COMPLETE / DAI FREE-FIRST ROUTER")
                     if self.voice_on.get() and answer:
                         threading.Thread(target=self.speak_worker, args=(answer,), daemon=True).start()
                 elif kind == "chat_error":

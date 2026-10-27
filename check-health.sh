@@ -11,10 +11,10 @@ print('Allowlist:', ', '.join(x['id'] for x in m['models']))
 print('Free-only:', m.get('free_only') is True)
 print('Automatic model fallback:', 'DISABLED' if m.get('automatic_fallback') is False else 'NOT STRICT')
 print('Inference API:', s['api_base_url'])
-key=root/s.get('api_key_file','.secrets/openrouter-api-key')
-print('OpenRouter key file:', 'present' if key.is_file() and key.stat().st_size else 'missing')
+key=root/s.get('api_key_file','.secrets/api-key')
+print('FreeLLMAPI unified key file:', 'present' if key.is_file() and key.stat().st_size else 'missing')
 if key.is_file():
-    print('OpenRouter key file permissions:', oct(key.stat().st_mode & 0o777))
+    print('FreeLLMAPI key file permissions:', oct(key.stat().st_mode & 0o777))
 try:
     with urllib.request.urlopen(s['ping_url'], timeout=3) as r:
         print('Existing FreeLLMAPI health:', r.status, r.read(200).decode('utf-8','replace'))

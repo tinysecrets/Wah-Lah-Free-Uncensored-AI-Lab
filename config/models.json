@@ -1,36 +1,25 @@
 {
   "name": "Wah-Lah Free Uncensored AI Lab",
-  "allowlist_mode": "strict",
+  "allowlist_mode": "router-managed",
   "automatic_fallback": false,
   "free_only": true,
-  "default_model": "nousresearch/hermes-3-llama-3.1-405b:free",
+  "default_model": "dai/auto",
   "models": [
     {
-      "id": "nousresearch/hermes-3-llama-3.1-405b:free",
-      "provider_model_id": "nousresearch/hermes-3-llama-3.1-405b:free",
-      "provider_id": "openrouter",
-      "provider_api_key_required": true,
-      "display_name": "Hermes 3 Llama 3.1 405B — Free route",
-      "parameter_count": "405B",
-      "status": "allowlisted",
+      "id": "dai/auto",
+      "display_name": "DAI Auto — free-first router",
+      "gateway": "local-dai-router",
+      "gateway_model_id": "dai/auto",
+      "provider_id": "free-first",
+      "status": "enabled",
       "claimed_characteristics": [
-        "uncensored",
-        "steerable",
+        "general assistant",
         "coding",
-        "tool-calling"
+        "tool calling",
+        "model selection through configured free-first router"
       ],
-      "provider": "OpenRouter :free route; FreeLLMAPI remains linked for health/status",
-      "price_policy": "$0 only; exact :free model suffix required; no model or paid fallback",
-      "uncensored_source": "https://nousresearch.com/freedom-at-the-frontier-hermes-3",
-      "free_endpoint_source": "https://openrouter.ai/nousresearch/hermes-3-llama-3.1-405b:free/pricing",
-      "schedule_notice": "OpenRouter currently marks Hermes 3 405B as going away November 2, 2026. If that free endpoint is retired, this app must stop until another explicitly uncensored $0 endpoint is verified.",
-      "constraints": "The client sends this exact model ID only; uses the :free suffix; fails closed if no free endpoint is available; does not send automatic fallback models."
+      "price_policy": "$0 only; the local DAI router enforces hard-zero-cost free-first routing and has paid routes disabled."
     }
   ],
-  "disallowed_behavior": [
-    "automatic model selection",
-    "generic auto route",
-    "fallback to other models",
-    "paid provider fallback"
-  ]
+  "notes": "The local DAI router owns free model selection. This app no longer pins inference to a single unavailable upstream provider."
 }
